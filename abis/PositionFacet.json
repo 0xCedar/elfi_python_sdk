@@ -1,0 +1,335 @@
+[
+	{
+		"inputs": [],
+		"name": "SymbolNotExists",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "getAllPositions",
+		"outputs": [
+			{
+				"components": [
+					{
+						"components": [
+							{
+								"internalType": "bytes32",
+								"name": "key",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "symbol",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bool",
+								"name": "isLong",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isCrossMargin",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "account",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "marginToken",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "indexToken",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "qty",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "entryPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "entryMarginTokenPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "leverage",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "initialMargin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "initialMarginInUsd",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "initialMarginInUsdFromBalance",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "holdPoolAmount",
+								"type": "uint256"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "closeFeeInUsd",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "openBorrowingFeePerToken",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "realizedBorrowingFee",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "realizedBorrowingFeeInUsd",
+										"type": "uint256"
+									},
+									{
+										"internalType": "int256",
+										"name": "openFundingFeePerQty",
+										"type": "int256"
+									},
+									{
+										"internalType": "int256",
+										"name": "realizedFundingFee",
+										"type": "int256"
+									},
+									{
+										"internalType": "int256",
+										"name": "realizedFundingFeeInUsd",
+										"type": "int256"
+									}
+								],
+								"internalType": "struct Position.PositionFee",
+								"name": "positionFee",
+								"type": "tuple"
+							},
+							{
+								"internalType": "int256",
+								"name": "realizedPnl",
+								"type": "int256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastUpdateTime",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Position.Props",
+						"name": "position",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "liquidationPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "currentTimestamp",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct IPosition.PositionInfo[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "symbol",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "marginToken",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isCrossMargin",
+				"type": "bool"
+			}
+		],
+		"name": "getSinglePosition",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "key",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "symbol",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bool",
+						"name": "isLong",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCrossMargin",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "marginToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "indexToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "qty",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "entryPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "entryMarginTokenPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leverage",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "initialMargin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "initialMarginInUsd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "initialMarginInUsdFromBalance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "holdPoolAmount",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "closeFeeInUsd",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "openBorrowingFeePerToken",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "realizedBorrowingFee",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "realizedBorrowingFeeInUsd",
+								"type": "uint256"
+							},
+							{
+								"internalType": "int256",
+								"name": "openFundingFeePerQty",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "realizedFundingFee",
+								"type": "int256"
+							},
+							{
+								"internalType": "int256",
+								"name": "realizedFundingFeeInUsd",
+								"type": "int256"
+							}
+						],
+						"internalType": "struct Position.PositionFee",
+						"name": "positionFee",
+						"type": "tuple"
+					},
+					{
+						"internalType": "int256",
+						"name": "realizedPnl",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastUpdateTime",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Position.Props",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	}
+]

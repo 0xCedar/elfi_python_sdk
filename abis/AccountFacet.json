@@ -1,0 +1,198 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount1",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount2",
+				"type": "uint256"
+			}
+		],
+		"name": "AmountNotMatch",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "AmountZeroNotAllowed",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			}
+		],
+		"name": "InvalidRoleAccess",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "OnlyCollateralSupported",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "executionFee",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isWithdrawMax",
+				"type": "bool"
+			}
+		],
+		"name": "createWithdrawRequest",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "getAccountInfo",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "usedAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "interest",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "liability",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Account.TokenBalance[]",
+						"name": "tokenBalances",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "tokens",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "trialFundsTokens",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "trialFundsAmounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "positions",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "portfolioNetValue",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalUsedValue",
+						"type": "uint256"
+					},
+					{
+						"internalType": "int256",
+						"name": "availableValue",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "orderHoldInUsd",
+						"type": "uint256"
+					},
+					{
+						"internalType": "int256",
+						"name": "crossMMR",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "crossNetValue",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalMM",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct IAccount.AccountInfo",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
