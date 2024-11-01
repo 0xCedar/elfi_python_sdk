@@ -1,5 +1,13 @@
 # ELFi Protocol Python SDK
 
+## Pip Install
+
+The SDK can be installed via pip:
+
+```
+pip install elfi-python-sdk
+```
+
 ## Requirements
 
 Developed using:

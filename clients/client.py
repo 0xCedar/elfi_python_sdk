@@ -6,6 +6,7 @@ import requests
 from clients.keys import ARBITRUM_RPC, DIAMOND, REST_API, OrderSide, StopType, \
     PositionSide, OrderType
 from clients.utils import encode_bytes32
+import pkg_resources
 
 
 class ELFiBaseClient:
@@ -23,11 +24,11 @@ class ELFiBaseClient:
         self.w3.eth.defaultAccount = self.account
     
     def _erc20_contract(self, token):
-        with open('abis/ERC20.json', 'r') as f:
+        with open(pkg_resources.resource_filename('abis', 'ERC20.json'), 'r') as f:
             return self.w3.eth.contract(address=token, abi=json.loads(f.read()))
         
     def _facet_contract(self, facet):
-        with open('abis/' + facet + '.json', 'r') as f:
+        with open(pkg_resources.resource_filename('abis', facet + '.json'), 'r') as f:
             return self.w3.eth.contract(address=self.diamond, abi=json.loads(f.read()))
 
     def _sign_and_send_transaction(self, tx):
