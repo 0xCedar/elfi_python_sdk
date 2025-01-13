@@ -7,6 +7,7 @@ from clients.keys import ARBITRUM_RPC, DIAMOND, REST_API, OrderSide, StopType, \
     PositionSide, OrderType
 from clients.utils import encode_bytes32
 import pkg_resources
+from clients.configs import GAS_LIMIT
 
 
 class ELFiBaseClient:
@@ -70,7 +71,9 @@ class ELFiClient(ELFiBaseClient):
         super().__init__(private_key, rpc, diamond, rest_api)
         self._init_web3()
     
-    def create_increase_market_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, isCrossMargin=True):
+    def create_increase_market_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, isCrossMargin=True, executionFee=-1):
+        if executionFee < 0:
+            executionFee = GAS_LIMIT['placeIncreaseOrderGasFeeLimit'] * self.w3.eth.gas_price
         params = self._get_order_params()
         params.update({
             "symbol": encode_bytes32(symbol),
@@ -78,13 +81,16 @@ class ELFiClient(ELFiBaseClient):
             "isCrossMargin": isCrossMargin,
             "orderSide": orderSide.value,
             "orderMargin": orderMargin,
-            "leverage": leverage
+            "leverage": leverage,
+            "executionFee": executionFee,
             })
         if (isCrossMargin is False):
             self._token_approve(marginToken, orderMargin)
         return self.create_order_request(params)
     
-    def create_increase_limit_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, triggerPrice, isCrossMargin=True):
+    def create_increase_limit_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, triggerPrice, isCrossMargin=True, executionFee=-1):
+        if executionFee < 0:
+            executionFee = GAS_LIMIT['placeIncreaseOrderGasFeeLimit'] * self.w3.eth.gas_price
         params = self._get_order_params()
         params.update({
             "symbol": encode_bytes32(symbol),
@@ -94,13 +100,16 @@ class ELFiClient(ELFiBaseClient):
             "orderMargin": orderMargin,
             "leverage": leverage,
             "orderType": OrderType.LIMIT.value,
-            "trigger_price": triggerPrice
+            "trigger_price": triggerPrice,
+            "executionFee": executionFee,
             })
         if (isCrossMargin is False):
             self._token_approve(marginToken, orderMargin)
         return self.create_order_request(params)
     
-    def create_decrease_market_order(self, symbol, marginToken, orderSide: OrderSide, qty, isCrossMargin=True):
+    def create_decrease_market_order(self, symbol, marginToken, orderSide: OrderSide, qty, isCrossMargin=True, executionFee=-1):
+        if executionFee < 0:
+            executionFee = GAS_LIMIT['placeDecreaseOrderGasFeeLimit'] * self.w3.eth.gas_price
         params = self._get_order_params()
         params.update({
             "symbol": encode_bytes32(symbol),
@@ -108,12 +117,15 @@ class ELFiClient(ELFiBaseClient):
             "isCrossMargin": isCrossMargin,
             "posSide": PositionSide.DECRASE.value,
             "orderSide": orderSide.value,
-            "qty": qty
+            "qty": qty,
+            "executionFee": executionFee,
             })
         
         return self.create_order_request(params)
     
-    def create_stop_order(self, symbol, marginToken, orderSide: OrderSide, qty, triggerPrice, stopType: StopType, isCrossMargin=True):
+    def create_stop_order(self, symbol, marginToken, orderSide: OrderSide, qty, triggerPrice, stopType: StopType, isCrossMargin=True, executionFee=-1):
+        if executionFee < 0:
+            executionFee = GAS_LIMIT['placeDecreaseOrderGasFeeLimit'] * self.w3.eth.gas_price
         params = self._get_order_params()
         params.update({
             "symbol": encode_bytes32(symbol),
@@ -124,7 +136,8 @@ class ELFiClient(ELFiBaseClient):
             "orderSide": orderSide.value,
             "orderType": OrderType.STOP.value,
             "stopType": stopType.value,
-            "trigger_price": triggerPrice            
+            "trigger_price": triggerPrice,
+            "executionFee": executionFee,
             })
         return self.create_order_request(params)
     
@@ -151,8 +164,10 @@ class ELFiClient(ELFiBaseClient):
             })
         return self._sign_and_send_transaction(tx)
     
-    def withdraw(self, token, amount, isWithdrawMax=False):
-        tx = self._facet_contract("AccountFacet").functions.createWithdrawRequest(token, amount, 0, isWithdrawMax).build_transaction({
+    def withdraw(self, token, amount, isWithdrawMax=False, executionFee=-1):
+        if executionFee < 0:
+            executionFee = GAS_LIMIT['withdrawGasFeeLimit'] * self.w3.eth.gas_price
+        tx = self._facet_contract("AccountFacet").functions.createWithdrawRequest(token, amount, executionFee, isWithdrawMax).build_transaction({
                 'from': self.account,
                 'nonce': self.w3.eth.get_transaction_count(self.account)
             })
