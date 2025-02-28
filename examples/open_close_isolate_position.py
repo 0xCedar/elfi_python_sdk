@@ -1,8 +1,9 @@
 from clients.client import ELFiClient
-from examples.example_config import PRIVATE_KEY
 from clients.utils import to_address, multi_pow10
 from clients.keys import OrderSide
 from time import sleep
+
+PRIVATE_KEY = ''
 
 elfiClient = ELFiClient(PRIVATE_KEY)
 
@@ -22,7 +23,7 @@ leverage = multi_pow10(5, 5)
 # open long isolated position
 elfiClient.create_increase_market_order('SOLUSD', WETH, OrderSide.LONG, longOrderMargin, leverage, False)
 
-sleep(3)
+sleep(5)
 
 # get long isolated position
 longPosition = elfiClient.get_single_position('SOLUSD', WETH, True)
@@ -48,7 +49,7 @@ leverage = multi_pow10(8, 5)
 # open short isolated position
 elfiClient.create_increase_market_order('SOLUSD', USDC, OrderSide.SHORT, shortOrderMargin, leverage, False)
 
-sleep(3)
+sleep(5)
 
 # get short isolated position
 shortPosition = elfiClient.get_single_position('SOLUSD', USDC, False)

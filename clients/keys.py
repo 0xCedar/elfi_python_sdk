@@ -1,8 +1,11 @@
 from enum import Enum
 
 REST_API = "https://api.elfi.xyz"
-ARBITRUM_RPC = "https://arb1.arbitrum.io/rpc"
-DIAMOND = "0x153c613D572c050104086c7113d00B76Fbaa5d55"
+NONE_RPC = "NONE"
+
+class Network(Enum):
+    ARBITRUM = 42161
+    BASE = 8453
 
 
 class OrderType(Enum):
