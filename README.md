@@ -22,5 +22,5 @@ There are several examples which can be run and can be found in [examples.](http
 
 ## Release Notes
 
-V1.0.6
-- support base mainnet 
+V1.0.7
+- support base mainnet
