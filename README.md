@@ -18,3 +18,9 @@ Developed using:
 ## Examples
 
 There are several examples which can be run and can be found in [examples.](https://github.com/0xCedar/elfi_python_sdk/blob/main/examples/)
+
+
+## Release Notes
+
+V1.0.6
+- support base mainnet 
