@@ -12,10 +12,11 @@ from clients.configs import GAS_LIMIT, CHAIN_CONFIG
 
 class ELFiBaseClient:
     
-    def __init__(self, private_key, rpc, diamond, rest_api):
+    def __init__(self, private_key, network, rpc, diamond, rest_api):
+        self.private_key = private_key
+        self.network = network
         self.rpc = rpc
         self.diamond = diamond
-        self.private_key = private_key
         self.rest_api = rest_api
     
     def _init_web3(self):
@@ -29,7 +30,7 @@ class ELFiBaseClient:
             return self.w3.eth.contract(address=token, abi=json.loads(f.read()))
         
     def _facet_contract(self, facet):
-        with open(pkg_resources.resource_filename('abis', facet + '.json'), 'r') as f:
+        with open(pkg_resources.resource_filename('abis', self.network.lower() + '/' + facet + '.json'), 'r') as f:
             return self.w3.eth.contract(address=self.diamond, abi=json.loads(f.read()))
 
     def _sign_and_send_transaction(self, tx):
@@ -68,14 +69,15 @@ class ELFiBaseClient:
 class ELFiClient(ELFiBaseClient):
     def __init__(self, private_key, network=Network.ARBITRUM, rpc=NONE_RPC):
         if Network.BASE == network:
-            super().__init__(private_key, CHAIN_CONFIG['BASE']['RPC'] if rpc == NONE_RPC else rpc, CHAIN_CONFIG['BASE']['DIAMOND'], REST_API)
+            super().__init__(private_key, network.name, CHAIN_CONFIG['BASE']['RPC'] if rpc == NONE_RPC else rpc, CHAIN_CONFIG['BASE']['DIAMOND'], REST_API)
         else:
-            super().__init__(private_key, CHAIN_CONFIG['ARBITRUM']['RPC'] if rpc == NONE_RPC else rpc, CHAIN_CONFIG['ARBITRUM']['DIAMOND'], REST_API)
+            network = Network.ARBITRUM
+            super().__init__(private_key, network.name, CHAIN_CONFIG['ARBITRUM']['RPC'] if rpc == NONE_RPC else rpc, CHAIN_CONFIG['ARBITRUM']['DIAMOND'], REST_API)
         self._init_web3()
     
     def create_increase_market_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, isCrossMargin=True, executionFee=-1):
         if executionFee < 0:
-            executionFee = int(GAS_LIMIT['placeDecreaseOrderGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
+            executionFee = int(GAS_LIMIT['placeIncreaseOrderGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
         params = self._get_order_params()
         params.update({
             "symbol": encode_bytes32(symbol),
@@ -92,7 +94,7 @@ class ELFiClient(ELFiBaseClient):
     
     def create_increase_limit_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, triggerPrice, isCrossMargin=True, executionFee=-1):
         if executionFee < 0:
-            executionFee = int(GAS_LIMIT['placeDecreaseOrderGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
+            executionFee = int(GAS_LIMIT['placeIncreaseOrderGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
         params = self._get_order_params()
         params.update({
             "symbol": encode_bytes32(symbol),
@@ -160,6 +162,26 @@ class ELFiClient(ELFiBaseClient):
             })
         return self._sign_and_send_transaction(tx)
     
+    def change_cross_leverage(self, symbol, marginToken, isLong, leverage, executionFee=-1):
+        if executionFee < 0:
+            executionFee = int(GAS_LIMIT['positionUpdateLeverageGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
+        params = {}
+        params['symbol'] = encode_bytes32(symbol)
+        params['isLong'] = isLong
+        params['isNativeToken'] = False
+        params['isCrossMargin'] = True
+        params['leverage'] = leverage
+        params['marginToken'] = marginToken
+        params['addMarginAmount'] = 0
+        params['executionFee'] = executionFee
+        params = tuple(params.values())
+        tx = self._facet_contract("PositionFacet").functions.createUpdateLeverageRequest(params).build_transaction({
+            'from': self.account,
+            'value': executionFee,
+            'nonce': self.w3.eth.get_transaction_count(self.account)
+        })
+        return self._sign_and_send_transaction(tx)
+    
     def deposit(self, token, amount):
         self._token_approve(token, amount)
         tx = self._facet_contract("AccountFacet").functions.deposit(token, amount).build_transaction({
@@ -170,7 +192,7 @@ class ELFiClient(ELFiBaseClient):
     
     def withdraw(self, token, amount, isWithdrawMax=False, executionFee=-1):
         if executionFee < 0:
-            executionFee = int(GAS_LIMIT['placeDecreaseOrderGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
+            executionFee = int(GAS_LIMIT['withdrawGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
         tx = self._facet_contract("AccountFacet").functions.createWithdrawRequest(token, amount, executionFee, isWithdrawMax).build_transaction({
                 'from': self.account,
                 'value': executionFee,

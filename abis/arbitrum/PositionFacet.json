@@ -1,8 +1,103 @@
 [
 	{
-		"inputs": [],
-		"name": "SymbolNotExists",
-		"type": "error"
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "symbol",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bool",
+						"name": "isLong",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isNativeToken",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCrossMargin",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leverage",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "marginToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "addMarginAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "executionFee",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct IPosition.UpdateLeverageParams",
+				"name": "params",
+				"type": "tuple"
+			}
+		],
+		"name": "createUpdateLeverageRequest",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "positionKey",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAdd",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isNativeToken",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "marginToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "updateMarginAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "executionFee",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct IPosition.UpdatePositionMarginParams",
+				"name": "params",
+				"type": "tuple"
+			}
+		],
+		"name": "createUpdatePositionMarginRequest",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"inputs": [

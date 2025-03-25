@@ -2,48 +2,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "amount1",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount2",
-				"type": "uint256"
-			}
-		],
-		"name": "AmountNotMatch",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "AmountZeroNotAllowed",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "role",
-				"type": "bytes32"
-			}
-		],
-		"name": "InvalidRoleAccess",
-		"type": "error"
-	},
-	{
-		"inputs": [],
-		"name": "OnlyCollateralSupported",
-		"type": "error"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "token",
 				"type": "address"

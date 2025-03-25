@@ -1,0 +1,228 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "orderId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "reasonCode",
+				"type": "bytes32"
+			}
+		],
+		"name": "cancelOrder",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "symbol",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCrossMargin",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isNativeToken",
+						"type": "bool"
+					},
+					{
+						"internalType": "enum Order.Side",
+						"name": "orderSide",
+						"type": "uint8"
+					},
+					{
+						"internalType": "enum Order.PositionSide",
+						"name": "posSide",
+						"type": "uint8"
+					},
+					{
+						"internalType": "enum Order.Type",
+						"name": "orderType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "enum Order.StopType",
+						"name": "stopType",
+						"type": "uint8"
+					},
+					{
+						"internalType": "address",
+						"name": "marginToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "qty",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "orderMargin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "leverage",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "triggerPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "acceptablePrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "executionFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "placeTime",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct IOrder.PlaceOrderParams",
+				"name": "params",
+				"type": "tuple"
+			}
+		],
+		"name": "createOrderRequest",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "getAccountOrders",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "account",
+								"type": "address"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "symbol",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "enum Order.Side",
+								"name": "orderSide",
+								"type": "uint8"
+							},
+							{
+								"internalType": "enum Order.PositionSide",
+								"name": "posSide",
+								"type": "uint8"
+							},
+							{
+								"internalType": "enum Order.Type",
+								"name": "orderType",
+								"type": "uint8"
+							},
+							{
+								"internalType": "enum Order.StopType",
+								"name": "stopType",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bool",
+								"name": "isCrossMargin",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isExecutionFeeFromTradeVault",
+								"type": "bool"
+							},
+							{
+								"internalType": "address",
+								"name": "marginToken",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "qty",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "leverage",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "orderMargin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "triggerPrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "acceptablePrice",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "placeTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "executionFee",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "lastBlock",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Order.OrderInfo",
+						"name": "orderInfo",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct IOrder.AccountOrder[]",
+				"name": "result",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

@@ -5,3 +5,9 @@
 .project
 .pydevproject
 .settings/
+MANIFEST.in
+elfi_python_sdk.egg-info/
+requirements.txt
+setup.py
+build/
+dist/

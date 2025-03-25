@@ -1,0 +1,202 @@
+[
+	{
+		"inputs": [],
+		"name": "getAllSymbols",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "code",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "enum Symbol.Status",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "address",
+						"name": "stakeToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "indexToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "baseToken",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "maxLeverage",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tickSize",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "openFeeRate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "closeFeeRate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLongOpenInterestCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxShortOpenInterestCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLongOpenInterestUserCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxShortOpenInterestUserCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "longShortRatioLimit",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "longShortOiBottomLimit",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct AppConfig.SymbolConfig",
+						"name": "config",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct IMarket.SymbolInfo[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "code",
+				"type": "bytes32"
+			}
+		],
+		"name": "getSymbol",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "code",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "enum Symbol.Status",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"internalType": "address",
+						"name": "stakeToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "indexToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "baseToken",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "maxLeverage",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tickSize",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "openFeeRate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "closeFeeRate",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLongOpenInterestCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxShortOpenInterestCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxLongOpenInterestUserCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "maxShortOpenInterestUserCap",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "longShortRatioLimit",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "longShortOiBottomLimit",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct AppConfig.SymbolConfig",
+						"name": "config",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct IMarket.SymbolInfo",
+				"name": "params",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
