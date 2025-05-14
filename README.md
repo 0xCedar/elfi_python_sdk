@@ -24,3 +24,6 @@ There are several examples which can be run and can be found in [examples.](http
 
 V1.0.7
 - support base mainnet
+
+V1.0.8
+- add create degen order
