@@ -74,6 +74,29 @@ class ELFiClient(ELFiBaseClient):
             network = Network.ARBITRUM
             super().__init__(private_key, network.name, CHAIN_CONFIG['ARBITRUM']['RPC'] if rpc == NONE_RPC else rpc, CHAIN_CONFIG['ARBITRUM']['DIAMOND'], REST_API)
         self._init_web3()
+        
+    def create_increase_degen_order(self, degenSymbol, marginToken, orderSide: OrderSide, orderMargin, leverage, takeProfitRate, executionFee=-1):
+        if executionFee < 0:
+            executionFee = int(GAS_LIMIT['placeIncreaseOrderGasFeeLimit'] * self.w3.eth.gas_price * 5 / 4)
+        else:
+            executionFee = int(executionFee)
+        params = self._get_order_params()
+        params.update({
+            "symbol": encode_bytes32(degenSymbol),
+            "marginToken": marginToken,
+            "isCrossMargin": True,
+            "orderSide": orderSide.value,
+            "orderMargin": orderMargin,
+            "leverage": leverage,
+            "executionFee": executionFee,
+            })
+        contractParams = (tuple(params.values()), takeProfitRate, executionFee, executionFee)
+        tx = self._facet_contract("OrderFacet").functions.createDegenOrderRequest(contractParams).build_transaction({
+                'from': self.account,
+                'value': 3 * executionFee,
+                'nonce': self.w3.eth.get_transaction_count(self.account)
+            })
+        return self._sign_and_send_transaction(tx)
     
     def create_increase_market_order(self, symbol, marginToken, orderSide: OrderSide, orderMargin, leverage, isCrossMargin=True, executionFee=-1):
         if executionFee < 0:
