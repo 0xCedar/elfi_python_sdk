@@ -280,11 +280,11 @@ class ELFiClient(ELFiBaseClient):
     def get_tickers(self):
         return self._get_rest("prices/tickers")
     
-    def get_candles(self, symbol, period, limit=500):
-        return self.getKlines(symbol, period, limit)
+    def get_candles(self, indexTokenSymbol, period, limit=500):
+        return self.getKlines(indexTokenSymbol, period, limit)
     
-    def get_klines(self, symbol, period, limit=500):
-        return self._get_rest("prices/candles", {"symbol": encode_bytes32(symbol), "period": period, "limit":limit})
+    def get_klines(self, indexTokenSymbol, period, limit=500):
+        return self._get_rest("prices/candles", {"tokenSymbol": indexTokenSymbol, "period": period, "limit":limit})
     
     def _get_order_params(self):
         params = {}
